@@ -2,6 +2,7 @@ from cluster import Cluster
 from node import Node
 from pod import Pod
 from scheduler import Scheduler
+from traffic_generator import TrafficGenerator
 
 
 def main():
@@ -26,17 +27,10 @@ def main():
         else:
             print(f'No node could accommodate instance {instance.name}')
 
-    # Escalamiento Horizontal
-    cluster.scale_horizontal(Pod('Instance4', 20, 40, 50), 2)
-
-    # Desescalamiento Horizontal
-    cluster.downscale_horizontal('Instance4', 1)
-
-    # Escalamiento Vertical
-    node1.scale_pod('Instance1', 10, 20, 30)
-
-    # Desescalamiento Vertical
-    node1.downscale_pod('Instance1', 5, 10, 15)
+    # Generador de Tráfico
+    traffic_generator = TrafficGenerator(cluster)
+    for _ in range(10):  # Simula 10 ciclos de tráfico
+        traffic_generator.simulate_traffic()
 
     # Mostrar el estado final de las instancias
     print(cluster)
