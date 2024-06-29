@@ -29,8 +29,14 @@ def main():
     # Escalamiento Horizontal
     cluster.scale_horizontal(Pod('Instance4', 20, 40, 50), 2)
 
+    # Desescalamiento Horizontal
+    cluster.downscale_horizontal('Instance4', 1)
+
     # Escalamiento Vertical
     node1.scale_pod('Instance1', 10, 20, 30)
+
+    # Desescalamiento Vertical
+    node1.downscale_pod('Instance1', 5, 10, 15)
 
     # Mostrar el estado final de las instancias
     print(cluster)

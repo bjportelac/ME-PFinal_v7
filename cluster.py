@@ -12,6 +12,13 @@ class Cluster:
                     print(f'Scaled horizontally: {pod.name} to {node.name}')
                     break
 
+    def downscale_horizontal(self, pod_name, count):
+        for _ in range(count):
+            for node in self.nodes:
+                if node.remove_pod(pod_name):
+                    print(f'Descaled horizontally: {pod_name} to {node.name}')
+                    break
+
     def __repr__(self):
         return f'Cluster - Nodes: {self.nodes}'
 
