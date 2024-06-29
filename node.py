@@ -35,6 +35,7 @@ class Node:
                     self.resources['RAM'].allocate(ram_increment)
                     self.resources['STORAGE'].allocate(storage_increment)
                     pod.scale(cpu_increment, ram_increment, storage_increment)
+                    pod.calculate_utility()
                     return True
         return False
 
@@ -45,6 +46,7 @@ class Node:
                 self.resources['CPU'].release(cpu_decrement)
                 self.resources['RAM'].release(ram_decrement)
                 self.resources['STORAGE'].release(storage_decrement)
+                pod.calculate_utility()
                 return True
         return False
 
@@ -57,6 +59,15 @@ class Node:
                 self.pods.remove(pod)
                 return True
         return False
+
+    def monitor_utility(self):
+        for pod in self.pods:
+            if pod.utility < 0.5:  # Umbral de utilidad bajo
+                # Intentar desescalar si la utilidad es baja
+                self.downscale_pod(pod.name, 10, 10, 10)
+            elif pod.utility > 1.5:  # Umbral de utilidad alto
+                # Intentar escalar si la utilidad es alta
+                self.scale_pod(pod.name, 10, 10, 10)
 
     def __repr__(self):
         return (f'Node {self.name} - Resources: {self.resources} - '

@@ -36,6 +36,7 @@ def main():
 
     # Mostrar el estado final de las instancias
     print(cluster)
+
     print(json.dumps(cluster.to_dict(), indent=4))
 
     pass
