@@ -29,7 +29,7 @@ class TrafficGenerator:
                 elif pod.ram_request < node.resources['RAM'].total * 0.2:
                     node.downscale_pod(pod.name, 0, 20, 0)
 
-                if pod.storage_request > node.resources['STORAGE'].total * 0.8:
+                if pod.storage_request > node.resources['STORAGE'].total * 0.2:
                     node.scale_pod(pod.name, 0, 0, 50)
-                elif pod.storage_request < node.resources['STORAGE'].total * 0.2:
+                elif pod.storage_request < node.resources['STORAGE'].total * 0.8:
                     node.downscale_pod(pod.name, 0, 0, 50)

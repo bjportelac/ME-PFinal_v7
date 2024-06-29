@@ -15,3 +15,10 @@ class Resource:
 
     def __repr__(self):
         return f'{self.name} - Total: {self.total}, Available: {self.available}'
+
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'total': self.total,
+            'available': self.available
+        }

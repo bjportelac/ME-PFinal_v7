@@ -62,3 +62,9 @@ class Node:
         return (f'Node {self.name} - Resources: {self.resources} - '
                 f'Pods: {self.pods}')
 
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'resources': {k: v.to_dict() for k, v in self.resources.items()},
+            'pods': [pod.to_dict() for pod in self.pods]
+        }

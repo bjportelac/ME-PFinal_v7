@@ -22,3 +22,7 @@ class Cluster:
     def __repr__(self):
         return f'Cluster - Nodes: {self.nodes}'
 
+    def to_dict(self):
+        return {
+            'nodes': [node.to_dict() for node in self.nodes]
+        }

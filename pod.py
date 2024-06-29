@@ -14,3 +14,10 @@ class Pod:
         return (f'Instance {self.name} - CPU: {self.cpu_request}, '
                 f'RAM: {self.ram_request}, STORAGE: {self.storage_request}')
 
+    def to_dict(self):
+        return {
+            'name': self.name,
+            'cpu_request': self.cpu_request,
+            'ram_request': self.ram_request,
+            'storage_request': self.storage_request
+        }
