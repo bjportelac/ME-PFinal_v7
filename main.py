@@ -4,6 +4,7 @@ from cluster import Cluster
 from node import Node
 from pod import Pod
 from scheduler import Scheduler
+from simulation import Simulation
 from traffic_generator import TrafficGenerator
 
 
@@ -29,13 +30,19 @@ def main():
         else:
             print(f'No node could accommodate instance {instance.name}')
 
-    # Generador de Tráfico
-    traffic_generator = TrafficGenerator(cluster)
-    for _ in range(10):  # Simula 10 ciclos de tráfico
-        traffic_generator.simulate_traffic()
+    # Configurar y ejecutar la simulación
+    simulation = Simulation(cluster, duration=1000)  # Simula por 1000 segundos virtuales
+    simulation.run()
+
+    # Obtener los logs de la simulación
+    logs = simulation.logger.get_logs()
 
     # Mostrar el estado final de las instancias
     print(cluster)
+
+    # Ejemplo de análisis de logs (imprimir algunos logs)
+    for log in logs[:5]:  # Mostrar los primeros 5 logs
+        print(log)
 
     print(json.dumps(cluster.to_dict(), indent=4))
 
