@@ -11,8 +11,8 @@ class TrafficGenerator:
             for pod in node.pods:
                 cpu_load = random.randint(-10, 20)
                 ram_load = random.randint(-20, 40)
-                storage_load = random.randint(-50, 100)
-                traffic_load = random.randint(0, 100)  # Simula el tráfico
+                storage_load = int(random.expovariate(50))
+                traffic_load = random.expovariate(100)  # Simula el tráfico
 
                 # Ajusta la carga y el tráfico en la instancia
                 pod.cpu_request = max(0, pod.cpu_request + cpu_load)
