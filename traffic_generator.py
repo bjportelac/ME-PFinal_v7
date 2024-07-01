@@ -29,8 +29,8 @@ class TrafficGenerator:
         """
         for node in self.cluster.nodes:
             for pod in node.pods:
-                cpu_load = random.randint(-15, 15)
-                ram_load = random.randint(-10, 30)
+                cpu_load = random.randint(-5, 15)
+                ram_load = random.randint(-2, 10)
                 storage_load = int(random.expovariate(25))
                 traffic_load = random.expovariate(100)  # Simula el tráfico
 
